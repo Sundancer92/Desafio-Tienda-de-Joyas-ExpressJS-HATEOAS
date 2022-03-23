@@ -1,4 +1,4 @@
-exports.results = [
+module.exports = [
   {
     id: 1,
     name: 'Collar Heart',
