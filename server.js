@@ -7,7 +7,7 @@ app.listen(3000, () => console.log("Your app listening on port 3000"));
 // Carpeta publica
 app.use(express.static("public"));
 
-// ? Funciones
+// ? Import Funciones
 const {
 	filtroPorCategoria,
 	HATEOASV1,
@@ -44,6 +44,10 @@ app.get("/MyPreciousSpa/apiV1", (req, res) => {
 });
 
 app.get("/MyPreciousSpa/apiV2", (req, res) => {
+	if (req.query.page) {
+		const { page } = req.query;
+		return res.send({ joyas: HATEOASV2().slice(page * 2 - 2, page * 2) });
+	}
 	res.send({
 		data: HATEOASV2(),
 	});
