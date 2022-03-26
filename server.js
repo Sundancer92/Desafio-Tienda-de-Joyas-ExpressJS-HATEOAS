@@ -13,6 +13,7 @@ const {
 	HATEOASV1,
 	HATEOASV2,
 	fieldsSelect,
+	orderValues,
 } = require("./funciones.js");
 
 app.get("/MyPreciousSpa/apiV2/:id", (req, res) => {
@@ -44,6 +45,11 @@ app.get("/MyPreciousSpa/apiV1", (req, res) => {
 });
 
 app.get("/MyPreciousSpa/apiV2", (req, res) => {
+	const { values } = req.query;
+	
+	if (values == "asc") return res.send(orderValues("asc"));
+	if (values == "desc") return res.send(orderValues("desc"));
+
 	if (req.query.page) {
 		const { page } = req.query;
 		return res.send({ joyas: HATEOASV2().slice(page * 2 - 2, page * 2) });

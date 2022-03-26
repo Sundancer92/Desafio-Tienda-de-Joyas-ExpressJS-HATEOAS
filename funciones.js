@@ -1,6 +1,6 @@
 const joyas = require("./data/joyas.js");
 
-// HEATEOAS
+// * HEATEOAS
 const HATEOASV1 = () =>
 	joyas.map((j) => {
 		return {
@@ -37,8 +37,8 @@ const filtroPorCategoria = (category) => {
 	// cuerpo el mismo declarado como parámetro en la función.
 	return joyas.filter((j) => j.category === category);
 };
-// *
 
+// * Filtro por campos
 const fieldsSelect = (joya, fields) => {
 	for (propiedad in joya) {
 		if (!fields.includes(propiedad)) {
@@ -48,4 +48,12 @@ const fieldsSelect = (joya, fields) => {
 	return { joya };
 };
 
-module.exports = { filtroPorCategoria, HATEOASV1, HATEOASV2, fieldsSelect };
+// * Ordenamiento por valor
+const orderValues = (order) => {
+	return order == "asc"
+		? joyas.sort((a, b) => a.value - b.value)
+		:order == "desc"
+		? joyas.sort((a, b) => b.value - a.value)
+		: false
+}
+module.exports = { filtroPorCategoria, HATEOASV1, HATEOASV2, fieldsSelect, orderValues };
